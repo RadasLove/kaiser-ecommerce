@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { signout } from '../auth';
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -13,22 +14,40 @@ const Menu = ({ history }) => (
   <div>
     <ul className="nav nav-tabs bg-primary">
       <li className="nav-item">
-        <Link 
-        className="nav-link" 
-        style={isActive(history, '/')}
-        to="/">
+        <Link className="nav-link" style={isActive(history, '/')} to="/">
           Home
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" style={isActive(history, '/signin')} to="/signin">
-          Sign
+        <Link
+          className="nav-link"
+          style={isActive(history, '/signin')}
+          to="/signin"
+        >
+          Přihlášení
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" style={isActive(history, '/signup')} to="/signup">
-          SignUp
+        <Link
+          className="nav-link"
+          style={isActive(history, '/signup')}
+          to="/signup"
+        >
+          Registrace
         </Link>
+      </li>
+      <li className="nav-item">
+        <span
+          className="nav-link"
+          style={{ cursor: 'pointer', color: '#ffffff' }}
+          onClick={() =>
+            signout(() => {
+              history.push('/');
+            })
+          }
+        >
+          Odhlášení
+        </span>
       </li>
     </ul>
   </div>

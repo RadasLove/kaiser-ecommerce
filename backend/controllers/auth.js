@@ -26,7 +26,7 @@ exports.signin = (req, res) => {
   User.findOne({ email }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
-        err: 'Uživatel nenalezen. Registrujte se prosím'
+        error: 'Uživatel nenalezen. Registrujte se prosím'
       });
     }
 
