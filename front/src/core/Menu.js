@@ -12,6 +12,7 @@ const isActive = (history, path) => {
 
 const Menu = ({ history }) => (
   <div>
+    <div className="bg-primary"></div>
     <ul className="nav nav-tabs bg-primary">
       <li className="nav-item">
         <Link className="nav-link" style={isActive(history, '/')} to="/">
@@ -83,6 +84,7 @@ const Menu = ({ history }) => (
       )}
     </ul>
   </div>
+  
 );
 
 export default withRouter(Menu);

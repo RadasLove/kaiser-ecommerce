@@ -64,15 +64,13 @@ const AddCategory = () => {
   };
 
   const goBack = () => (
-
-<div className="mt-5">
-  <Link to='/admin/dashboard' className='text-warning'> Zpět</Link>
-
-
-</div>
-
-  )
-  
+    <div className="mt-5">
+      <Link to="/admin/dashboard" className="text-warning">
+        {' '}
+        Zpět
+      </Link>
+    </div>
+  );
 
   return (
     <Layout

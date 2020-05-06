@@ -48,7 +48,7 @@ const Signin = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Password</label>
+        <label className="text-muted">Heslo</label>
         <input
           onChange={handleChange('password')}
           type="password"
