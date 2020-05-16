@@ -45,8 +45,8 @@ const AdminDashboard = () => {
 
   return (
     <Layout
-      title="Dashboard"
-      description="User Dashboard"
+      title="Admin menu"
+      description="Nastavení eshopu"
       className="container"
     >
       <div className="row">
