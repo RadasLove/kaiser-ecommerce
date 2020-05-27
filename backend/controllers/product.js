@@ -4,7 +4,9 @@ const fs = require('fs');
 const Product = require('../models/product');
 
 exports.productById = (req, res, next, id) => {
-  Product.findById(id).exec((err, product) => {
+  Product.findById(id)
+  .populate('category')
+  .exec((err, product) => {
     if (err || !product) {
       return res.status(400).json({
         error: 'Produkt nenalezen',
@@ -248,8 +250,31 @@ exports.listBySearch = (req, res) => {
 exports.photo = (req, res, next) => {
   if (req.product.photo.data) {
     res.set('Content-Type', req.product.photo.contentType);
-    return res.send(req.product.photo.data)
+    return res.send(req.product.photo.data);
   }
 
   next();
+};
+
+exports.listSearch = (req, res) => {
+  // create query object to hold search value and category value
+  const query = {};
+  // assign search value to query.name
+  if (req.query.search) {
+      query.name = { $regex: req.query.search, $options: 'i' };
+      // assigne category value to query.category
+      if (req.query.category && req.query.category != 'All') {
+          query.category = req.query.category;
+      }
+      // find the product based on query object with 2 properties
+      // search and category
+      Product.find(query, (err, products) => {
+          if (err) {
+              return res.status(400).json({
+                  error: errorHandler(err)
+              });
+          }
+          res.json(products);
+      }).select('-photo');
+  }
 };
