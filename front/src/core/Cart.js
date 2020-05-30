@@ -3,13 +3,15 @@ import Layout from './Layout';
 import { getCart } from './cartHelpers';
 import Card from './Card';
 import { Link } from 'react-router-dom';
+import Checkout from './Checkout'
 
 const Cart = () => {
   const [items, setItems] = useState([]);
+  const [run, setRun] = useState(false);
 
   useEffect(() => {
     setItems(getCart());
-  }, []);
+  }, [run]);
 
   const showItems = (items) => {
     return (
@@ -19,7 +21,7 @@ const Cart = () => {
         </div>
         <hr />
         {items.map((product, i) => (
-          <Card key={i} product={product} showAddToCartButton={false} />
+          <Card key={i} product={product} showAddToCartButton={false} cartUpdate={true} showRemoveProductButton={true} setRun={setRun} run={run}/>
         ))}
       </div>
     );
@@ -42,7 +44,9 @@ const Cart = () => {
           {items.length > 0 ? showItems(items) : noItemsMessage()}
         </div>
         <div className="col-6">
-          <p>ukazat checkout, doprava, cena atp</p>
+          <h2 className="mb-4">Přehled nákupu</h2>
+          <hr />
+          <Checkout products={items} />
         </div>
       </div>
     </Layout>
